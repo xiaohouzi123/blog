@@ -2,28 +2,48 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<title>MyBlog</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <meta charset="utf-8">
+    <title>MyBlog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 
 <body>
-	<div class="container">
-		<h1><a href="/post/home/">MyBlog</a></h1>
+<div class="container">
+    <h1><a href="/post/home/">MyBlog</a></h1>
+    <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated %}
+            <li><img src="" alt="" style="width: 32px;height: 32px;border-radius: 32px;margin-top: 8px"></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">{{ current_user.username }}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="">用户信息</a></li>
+                    <li><a href="">修改密码</a></li>
+                    <li><a href="">修改邮箱</a></li>
+                    <li><a href="">修改头像</a></li>
+                </ul>
+            </li>
+            <li><a href="">退出</a></li>
 
-		<form method="POST" action="/post/search/" style="text-align: right;">
-			{% csrf_token %}
-			<input type="text" name="keyword">
-			<input type="submit" name="搜索">
-			<a href="/post/create/">新建文章</a>
-		</form>
+        {% else %}
+            <li><a href="/post/login/">登陆</a></li>
+            <li><a href="/post/register/">注册</a></li>
 
-		<hr>
+        {% endif %}
+    </ul>
+        <form method="POST" action="/post/search/" style="text-align: right;">
+            {% csrf_token %}
+            <input type="text" name="keyword">
+            <input type="submit" name="搜索">
+            <a href="/post/create/">新建文章</a>
+        </form>
 
-		<div class="content">{%block content %}{%endblock%}</div>
-	</div>
-	<div class="footer">当前访问人数：1</div>
+        <hr>
+
+        <div class="content">{% block content %}{% endblock %}</div>
+</div>
+<div class="footer">当前访问人数：1</div>
 </body>
 
 </html>

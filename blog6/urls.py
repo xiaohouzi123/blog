@@ -25,4 +25,7 @@ urlpatterns = [
     path('post/create/', views.create),
     path('post/comment/', views.comment),
     path('post/search/', views.search),
+#     用户
+    path('post/register/',views.register),
+    path('post/login/',views.login),
 ]

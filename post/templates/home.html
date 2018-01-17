@@ -15,7 +15,7 @@
 
 	<hr>
 	<div>最热文章</div>
-	{% for a, n in top10 %}
+	{% for a,n in top10 %}
 	<div class="index">
 		<span class="date">{{ a.date }}</span>
 		<a href="/post/show/?aid={{a.id}}">{{a.title}}</a>
